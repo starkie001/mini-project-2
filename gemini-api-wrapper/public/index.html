@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Gemini Prompt Wrapper</title>
+</head>
+<body>
+  <h1>Ask Gemini</h1>
+  <textarea id="prompt" rows="5" cols="50" placeholder="Type your prompt..."></textarea><br>
+  <button onclick="sendPrompt()">Generate</button>
+  <pre id="result"></pre>
+
+  <script>
+    async function sendPrompt() {
+      const prompt = document.getElementById('prompt').value;
+      const res = await fetch('/api/generate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ prompt })
+      });
+      const data = await res.json();
+      document.getElementById('result').innerText = data.content || data.error;
+    }
+  </script>
+</body>
+</html>

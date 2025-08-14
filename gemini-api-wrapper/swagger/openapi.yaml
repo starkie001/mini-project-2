@@ -1,0 +1,25 @@
+openapi: 3.0.0
+info:
+  title: Gemini Prompt Wrapper API
+  version: 1.0.0
+paths:
+  /api/generate:
+    post:
+      summary: Generate content using Gemini 2.0 Flash
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                prompt:
+                  type: string
+                  example: "Write a poem about spring"
+      responses:
+        '200':
+          description: Gemini Response
+        '400':
+          description: Invalid input
+        '500':
+          description: Gemini API Error
