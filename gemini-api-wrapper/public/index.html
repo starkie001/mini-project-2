@@ -2,14 +2,23 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Gemini Prompt Wrapper</title>
-  <link rel="stylesheet" type="text/css" href="index.css">
+  <title>Ask the Magic 8 Ball (Gemini Edition)</title>
+  <link rel="stylesheet" type="text/css" href="index.css" />
 </head>
 <body>
-  <h1>Ask Gemini</h1>
-  <textarea id="prompt" rows="5" cols="50" placeholder="Type your prompt..."></textarea><br>
-  <button onclick="sendPrompt()">Generate</button>
-  <pre id="result"></pre>
+  <div class="container">
+    <h1>🎱 Ask the Magic 8 Ball</h1>
+    <p>Think of a question, then click Generate to reveal your fate...</p>
+
+    <div class="ball">
+      <div class="answer">8</div>
+    </div>
+
+    <textarea id="prompt" rows="5" cols="50" placeholder="Type your question here..."></textarea><br>
+    <button onclick="sendPrompt()">Generate</button>
+
+    <pre id="result"></pre>
+  </div>
 
   <script>
     async function sendPrompt() {
@@ -20,11 +29,19 @@
         body: JSON.stringify({ prompt })
       });
       const data = await res.json();
+      const result = document.getElementById('result');
+      const answer = document.querySelector('.answer');
+
       if (!res.ok) {
-        document.getElementById('result').innerText = data.message;
+        result.innerText = data.message;
+        answer.textContent = '❌';
         return;
       }
-      document.getElementById('result').innerText = data.content;
+
+      result.innerText = `"${data.content}"`;
+      answer.textContent = data.content.length > 20
+        ? '🔮'
+        : data.content;
     }
   </script>
 </body>

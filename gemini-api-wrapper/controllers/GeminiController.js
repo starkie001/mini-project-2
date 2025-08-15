@@ -28,8 +28,8 @@ export default class GeminiController {
 
 function validatePrompt(prompt) {
     if (!prompt) throw new ValidationError("Prompt cannot be blank");
-    if (prompt.length > 10)
+    if (prompt.length > 50)
       throw new ValidationError(
-        "Prompt cannot be greater than 10 characters"
+        "Prompt cannot be greater than 50 characters"
       );
   }
