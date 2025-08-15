@@ -5,7 +5,6 @@ const GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/
 export default class GeminiDao {
   async callGeminiAPI(prompt) {
     const API_KEY = process.env.GEMINI_API_KEY;
-    console.log(API_KEY);
     const response = await axios.post(
       GEMINI_API_URL,
       { contents: [{ parts: [{ text: prompt }] }] },

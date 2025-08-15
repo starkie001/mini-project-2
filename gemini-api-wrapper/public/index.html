@@ -20,7 +20,11 @@
         body: JSON.stringify({ prompt })
       });
       const data = await res.json();
-      document.getElementById('result').innerText = data.content || data.error;
+      if (!res.ok) {
+        document.getElementById('result').innerText = data.message;
+        return;
+      }
+      document.getElementById('result').innerText = data.content;
     }
   </script>
 </body>

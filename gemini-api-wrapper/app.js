@@ -2,6 +2,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import geminiRoutes from './routes/geminiRoutes.js';
+import { errorHandler } from './middleware/error-handler.js';
 
 dotenv.config();
 
@@ -11,6 +12,8 @@ app.use(express.json());
 app.use(express.static('public'));
 
 app.use('/api/generate', geminiRoutes);
+
+app.use(errorHandler); 
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
